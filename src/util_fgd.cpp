@@ -13,10 +13,6 @@
 #include <sharedutils/util_markup_file.hpp>
 #include <sharedutils/datastream.h>
 
-#pragma comment(lib,"util.lib")
-#pragma comment(lib,"mathutil.lib")
-#pragma comment(lib,"vfilesystem.lib")
-
 util::fgd::KeyValue::KeyValue(const DataObject &obj)
 	: m_name{obj.name}
 {

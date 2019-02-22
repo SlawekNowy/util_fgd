@@ -14,3 +14,4 @@ util_fgd/x64/Release/util_fgd.tlog/CL.command.1.tlog
 util_fgd/x64/Release/util_fgd.tlog/Lib-link.read.1.tlog
 x64/Release/hl.fgd
 x64/Release/base.fgd
+build_winx64/

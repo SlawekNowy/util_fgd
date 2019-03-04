@@ -448,6 +448,7 @@ std::optional<util::fgd::Data> util::fgd::load_fgd(const std::string &fileName,c
 		return {};
 	auto str = f->ReadString();
 	DataStream ds {const_cast<void*>(reinterpret_cast<const void*>(str.data())),static_cast<uint32_t>(str.length())};
+	ds->SetOffset(0u);
 	util::MarkupFile mf{ds};
 	std::stack<util::fgd::PDataObject> objectStack {};
 	auto o = std::make_shared<util::fgd::DataObject>();

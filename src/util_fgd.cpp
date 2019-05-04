@@ -579,21 +579,3 @@ static void print(const util::fgd::DataObject &o,const std::string &t="")
 	//for(auto &child : o.children)
 	//	print(*child,t +'\t');
 }
-
-#if 0
-int main(int argc,char *argv[])
-{
-	auto fgData = util::fgd::load_fgd("hl.fgd");
-	if(fgData.has_value() == false)
-		return EXIT_FAILURE;
-
-	auto itTriggerHurt = fgData->classDefinitions.find("xen_tree");
-	if(itTriggerHurt != fgData->classDefinitions.end())
-	{
-		auto *pKeyValue = itTriggerHurt->second->FindKeyValue(*fgData,"filtername");
-		std::cout<<"";
-	}
-	for(;;);
-	return EXIT_SUCCESS;
-}
-#endif

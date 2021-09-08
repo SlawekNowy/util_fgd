@@ -18,7 +18,7 @@ util::fgd::KeyValue::KeyValue(const DataObject &obj)
 {
 	auto numAttrs = obj.attributes.size();
 	auto idx = 0u;
-	if(numAttrs > 0u && (ustring::compare(obj.attributes.front()->name,"input",false) == true || ustring::compare(obj.attributes.front()->name,"output",false) == true))
+	if(numAttrs > 0u && (ustring::compare<std::string>(obj.attributes.front()->name,"input",false) == true || ustring::compare<std::string>(obj.attributes.front()->name,"output",false) == true))
 		++idx;
 	if(numAttrs > idx)
 	{
@@ -33,57 +33,57 @@ util::fgd::KeyValue::KeyValue(const DataObject &obj)
 	if(obj.arguments.empty() == false)
 	{
 		auto &strType = obj.arguments.front();
-		if(ustring::compare(strType,"void",false))
+		if(ustring::compare<std::string>(strType,"void",false))
 			m_type = Type::Void;
-		else if(ustring::compare(strType,"string",false))
+		else if(ustring::compare<std::string>(strType,"string",false))
 			m_type = Type::String;
-		else if(ustring::compare(strType,"integer",false))
+		else if(ustring::compare<std::string>(strType,"integer",false))
 			m_type = Type::Integer;
-		else if(ustring::compare(strType,"float",false))
+		else if(ustring::compare<std::string>(strType,"float",false))
 			m_type = Type::Float;
-		else if(ustring::compare(strType,"choices",false))
+		else if(ustring::compare<std::string>(strType,"choices",false))
 			m_type = Type::Choices;
-		else if(ustring::compare(strType,"flags",false))
+		else if(ustring::compare<std::string>(strType,"flags",false))
 			m_type = Type::Flags;
-		else if(ustring::compare(strType,"axis",false))
+		else if(ustring::compare<std::string>(strType,"axis",false))
 			m_type = Type::Axis;
-		else if(ustring::compare(strType,"angle",false))
+		else if(ustring::compare<std::string>(strType,"angle",false))
 			m_type = Type::Angle;
-		else if(ustring::compare(strType,"color255",false))
+		else if(ustring::compare<std::string>(strType,"color255",false))
 			m_type = Type::Color255;
-		else if(ustring::compare(strType,"color1",false))
+		else if(ustring::compare<std::string>(strType,"color1",false))
 			m_type = Type::Color1;
-		else if(ustring::compare(strType,"filterclass",false))
+		else if(ustring::compare<std::string>(strType,"filterclass",false))
 			m_type = Type::FilterClass;
-		else if(ustring::compare(strType,"material",false))
+		else if(ustring::compare<std::string>(strType,"material",false))
 			m_type = Type::Material;
-		else if(ustring::compare(strType,"node_dest",false))
+		else if(ustring::compare<std::string>(strType,"node_dest",false))
 			m_type = Type::NodeDest;
-		else if(ustring::compare(strType,"npcclass",false))
+		else if(ustring::compare<std::string>(strType,"npcclass",false))
 			m_type = Type::NPCClass;
-		else if(ustring::compare(strType,"origin",false))
+		else if(ustring::compare<std::string>(strType,"origin",false))
 			m_type = Type::Origin;
-		else if(ustring::compare(strType,"pointentityclass",false))
+		else if(ustring::compare<std::string>(strType,"pointentityclass",false))
 			m_type = Type::PointEntityClass;
-		else if(ustring::compare(strType,"scene",false))
+		else if(ustring::compare<std::string>(strType,"scene",false))
 			m_type = Type::Scene;
-		else if(ustring::compare(strType,"sidelist",false))
+		else if(ustring::compare<std::string>(strType,"sidelist",false))
 			m_type = Type::SideList;
-		else if(ustring::compare(strType,"sound",false))
+		else if(ustring::compare<std::string>(strType,"sound",false))
 			m_type = Type::Sound;
-		else if(ustring::compare(strType,"sprite",false))
+		else if(ustring::compare<std::string>(strType,"sprite",false))
 			m_type = Type::Sprite;
-		else if(ustring::compare(strType,"studio",false))
+		else if(ustring::compare<std::string>(strType,"studio",false))
 			m_type = Type::Studio;
-		else if(ustring::compare(strType,"target_destination",false))
+		else if(ustring::compare<std::string>(strType,"target_destination",false))
 			m_type = Type::TargetDestination;
-		else if(ustring::compare(strType,"target_name_or_class",false))
+		else if(ustring::compare<std::string>(strType,"target_name_or_class",false))
 			m_type = Type::TargetNameOrClass;
-		else if(ustring::compare(strType,"target_source",false))
+		else if(ustring::compare<std::string>(strType,"target_source",false))
 			m_type = Type::TargetSource;
-		else if(ustring::compare(strType,"vecline",false))
+		else if(ustring::compare<std::string>(strType,"vecline",false))
 			m_type = Type::VecLine;
-		else if(ustring::compare(strType,"vector",false))
+		else if(ustring::compare<std::string>(strType,"vector",false))
 			m_type = Type::Vector;
 	}
 	if(m_type == Type::Choices || m_type == Type::Flags)
@@ -124,24 +124,24 @@ util::fgd::ClassDefinition::ClassDefinition(const Data &fgdData,const DataObject
 		if(obj.attributes.size() > 1u)
 			m_description = obj.attributes.at(1u)->name;
 	}
-	if(ustring::compare(obj.name,"@BaseClass",false))
+	if(ustring::compare<std::string>(obj.name,"@BaseClass",false))
 		m_type = ClassType::Base;
-	else if(ustring::compare(obj.name,"@PointClass",false))
+	else if(ustring::compare<std::string>(obj.name,"@PointClass",false))
 		m_type = ClassType::Point;
-	else if(ustring::compare(obj.name,"@NPCClass",false))
+	else if(ustring::compare<std::string>(obj.name,"@NPCClass",false))
 		m_type = ClassType::NPC;
-	else if(ustring::compare(obj.name,"@SolidClass",false))
+	else if(ustring::compare<std::string>(obj.name,"@SolidClass",false))
 		m_type = ClassType::Solid;
-	else if(ustring::compare(obj.name,"@KeyFrameClass",false))
+	else if(ustring::compare<std::string>(obj.name,"@KeyFrameClass",false))
 		m_type = ClassType::KeyFrame;
-	else if(ustring::compare(obj.name,"@MoveClass",false))
+	else if(ustring::compare<std::string>(obj.name,"@MoveClass",false))
 		m_type = ClassType::Move;
-	else if(ustring::compare(obj.name,"@FilterClass",false))
+	else if(ustring::compare<std::string>(obj.name,"@FilterClass",false))
 		m_type = ClassType::Filter;
 
 	m_properties = obj.parameters;
 	auto itBase = std::find_if(obj.parameters.begin(),obj.parameters.end(),[](const util::fgd::PDataObject &obj) {
-		return ustring::compare(obj->name,"base",false);
+		return ustring::compare<std::string>(obj->name,"base",false);
 	});
 	if(itBase != obj.parameters.end())
 	{
@@ -164,12 +164,12 @@ util::fgd::ClassDefinition::ClassDefinition(const Data &fgdData,const DataObject
 		if(child->attributes.empty() == false)
 		{
 			auto &attr = child->attributes.front();
-			if(ustring::compare(attr->name,"input",false))
+			if(ustring::compare<std::string>(attr->name,"input",false))
 			{
 				m_inputs.push_back({*child});
 				continue;
 			}
-			if(ustring::compare(attr->name,"output",false))
+			if(ustring::compare<std::string>(attr->name,"output",false))
 			{
 				m_outputs.push_back({*child});
 				continue;
@@ -190,7 +190,7 @@ const util::fgd::KeyValue *util::fgd::ClassDefinition::FindKeyValue(const Data &
 {
 	auto &keyValueList = (type == KeyValueType::KeyValue) ? m_keyValues : (type == KeyValueType::Input) ? m_inputs : m_outputs;
 	auto it = std::find_if(keyValueList.begin(),keyValueList.end(),[&name](const util::fgd::KeyValue &keyValue) {
-		return ustring::compare(keyValue.GetName(),name,false);
+		return ustring::compare<std::string>(keyValue.GetName(),name,false);
 	});
 	if(it != keyValueList.end())
 		return &(*it);
@@ -423,7 +423,7 @@ static util::MarkupFile::ResultCode read_block(util::MarkupFile &mf,std::stack<u
 						children.back()->attributes.push_back(o);
 						break;
 					case State::Children:
-						if(children.empty() == false && (ustring::compare(children.back()->name,"input",false) == true || ustring::compare(children.back()->name,"output",false) == true))
+						if(children.empty() == false && (ustring::compare<std::string>(children.back()->name,"input",false) == true || ustring::compare<std::string>(children.back()->name,"output",false) == true))
 						{
 							// Inputs and outputs have to be handled as special cases
 							auto oSpecializer = std::make_shared<util::fgd::DataObject>();
@@ -459,7 +459,7 @@ std::optional<util::fgd::Data> util::fgd::load_fgd(const std::string &fileName,c
 	// Convert raw data to FGD data structures
 	util::fgd::Data data {};
 	auto itMapSize = std::find_if(o->children.begin(),o->children.end(),[](const util::fgd::PDataObject &o) {
-		return ustring::compare(o->name,"@mapsize",false);
+		return ustring::compare<std::string>(o->name,"@mapsize",false);
 	});
 	if(itMapSize != o->children.end())
 	{
@@ -476,7 +476,7 @@ std::optional<util::fgd::Data> util::fgd::load_fgd(const std::string &fileName,c
 	}
 	for(auto &child : o->children)
 	{
-		if(ustring::compare(child->name,"@include",false) == true)
+		if(ustring::compare<std::string>(child->name,"@include",false) == true)
 		{
 			if(child->parameters.empty() == false)
 			{
@@ -501,13 +501,13 @@ std::optional<util::fgd::Data> util::fgd::load_fgd(const std::string &fileName,c
 			continue;
 		}
 		if(
-			ustring::compare(child->name,"@BaseClass",false) == false &&
-			ustring::compare(child->name,"@PointClass",false) == false &&
-			ustring::compare(child->name,"@NPCClass",false) == false &&
-			ustring::compare(child->name,"@SolidClass",false) == false &&
-			ustring::compare(child->name,"@KeyFrameClass",false) == false &&
-			ustring::compare(child->name,"@MoveClass",false) == false &&
-			ustring::compare(child->name,"@FilterClass",false) == false
+			ustring::compare<std::string>(child->name,"@BaseClass",false) == false &&
+			ustring::compare<std::string>(child->name,"@PointClass",false) == false &&
+			ustring::compare<std::string>(child->name,"@NPCClass",false) == false &&
+			ustring::compare<std::string>(child->name,"@SolidClass",false) == false &&
+			ustring::compare<std::string>(child->name,"@KeyFrameClass",false) == false &&
+			ustring::compare<std::string>(child->name,"@MoveClass",false) == false &&
+			ustring::compare<std::string>(child->name,"@FilterClass",false) == false
 		)
 			continue;
 		auto classDef = std::make_shared<util::fgd::ClassDefinition>(data,*child);

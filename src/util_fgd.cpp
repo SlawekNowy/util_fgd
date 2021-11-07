@@ -294,11 +294,16 @@ static util::MarkupFile::ResultCode read_string_value(util::MarkupFile &mf,char 
 	return r;
 }
 
-static util::fgd::PDataObject read_value(util::MarkupFile &mf,util::MarkupFile::ResultCode &resultCode)
+static util::fgd::PDataObject read_value(util::MarkupFile &mf,util::MarkupFile::ResultCode &resultCode,char *optInOutExpectedToken=nullptr)
 {
 	auto token = '\0';
 	if((resultCode=mf.ReadNextToken(token)) != util::MarkupFile::ResultCode::Ok || token == '[')
 		return nullptr;
+	if(optInOutExpectedToken && token != *optInOutExpectedToken)
+	{
+		*optInOutExpectedToken = token;
+		return nullptr;
+	}
 	std::string name {};
 	if((resultCode=read_string_value(mf,token,name)) != util::MarkupFile::ResultCode::Ok)
 		return nullptr;
@@ -324,8 +329,16 @@ static util::fgd::PDataObject read_value(util::MarkupFile &mf,util::MarkupFile::
 		case '+':
 		{
 			mf.IncrementFilePos();
-			auto subValue = read_value(mf,resultCode);
-			if(resultCode != util::MarkupFile::ResultCode::Ok || subValue == nullptr)
+			auto expectedToken = '"';
+			auto subValue = read_value(mf,resultCode,&expectedToken);
+			if(resultCode != util::MarkupFile::ResultCode::Ok)
+				return nullptr;
+			if(expectedToken != '"')
+			{
+				mf.DecrementFilePos();
+				break; // String ended prematurely
+			}
+			if(subValue == nullptr)
 				return nullptr;
 			o->name += subValue->name;
 			break;

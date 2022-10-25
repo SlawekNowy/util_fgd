@@ -11,6 +11,7 @@
 #include <unordered_map>
 #include <optional>
 #include <functional>
+#include <limits>
 class VFilePtrInternal;
 
 namespace util
